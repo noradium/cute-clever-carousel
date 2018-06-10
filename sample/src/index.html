@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>サンプル</title>
+	<style>
+		/* Required styles */
+		.ccc-frame {
+			overflow: hidden;
+		}
+		.ccc-items {
+			position: relative;
+			white-space: nowrap;
+		}
+		.ccc-items > * {
+			display: inline-block;
+		}
+
+		/* Application styles */
+		.carousel-items img {
+			width: 150px;
+		}
+		.carousel-items img:not(:last-child) {
+			margin-right: 16px;
+		}
+	</style>
+</head>
+<body>
+<div class="carousel">
+	<div class="ccc-frame">
+		<div class="ccc-items carousel-items">
+			<img src="https://placehold.jp/150x200.png?text=1" alt="">
+			<img src="https://placehold.jp/150x200.png?text=2" alt="">
+			<img src="https://placehold.jp/150x200.png?text=3" alt="">
+			<img src="https://placehold.jp/150x200.png?text=4" alt="">
+			<img src="https://placehold.jp/150x200.png?text=5" alt="">
+			<img src="https://placehold.jp/150x200.png?text=6" alt="">
+			<img src="https://placehold.jp/150x200.png?text=7" alt="">
+			<img src="https://placehold.jp/150x200.png?text=8" alt="">
+		</div>
+	</div>
+</div>
+<script type="application/javascript" src="index.js"></script>
+</body>
+</html>
