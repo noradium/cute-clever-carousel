@@ -1,9 +1,11 @@
 # cute-clever-carousel
+This library doesn't have much function as yet.
+Rather than a carousel, it is a scroll box with a grid.
 
 ## Usage
 ### Install
 ```bash
-npm install --save cute-clever-carousel
+$ npm install --save cute-clever-carousel
 ```
 
 ### HTML Markup
@@ -42,3 +44,17 @@ new Carousel(document.getElementsByClassName('carousel')[0], {/* options */});
 
 ### Options
 see `src/Options.ts`
+
+## Development
+```bash
+$ npm run watch
+
+$ cd sample
+$ sudo npm run start
+$ open http://localhost
+```
+
+## Test
+```bash
+$ npm test
+```
