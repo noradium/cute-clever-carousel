@@ -15,6 +15,9 @@
     "type": "git",
     "url": "https://github.com/noradium/cute-clever-carousel"
   },
+  "files": [
+    "lib"
+  ],
   "license": "MIT",
   "dependencies": {
     "tslib": "^1.9.2"
