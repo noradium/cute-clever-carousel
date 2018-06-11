@@ -22,7 +22,6 @@ export default class Carousel {
   private touchingInfo: TouchingInfo | null = null;
   private itemsX: number = 0;
 
-  private isPassiveSupported: boolean;
   private touchEventListenerOption: {passive: boolean} | false;
 
   constructor(
@@ -38,8 +37,7 @@ export default class Carousel {
     this.frameElement = element.getElementsByClassName(this.options.frameClassName)[0] as HTMLElement;
     this.itemsElement = element.getElementsByClassName(this.options.itemsClassName)[0] as HTMLElement;
 
-    this.isPassiveSupported = isPassiveSupported();
-    this.touchEventListenerOption = this.isPassiveSupported ? {passive: true} : false;
+    this.touchEventListenerOption = isPassiveSupported() ? {passive: false} : false;
 
     this.reset();
     this.frameElement.addEventListener('touchstart', this.onTouchStart, this.touchEventListenerOption);
@@ -102,8 +100,7 @@ export default class Carousel {
       this.touchingInfo.isHorizontalScroll = Math.abs(dX) - Math.abs(dY) > 0;
     }
 
-    // passive 非対応ブラウザでカルーセルをスクロールしようとする場合、デフォルトのスクロールを止めないとうまく動かない
-    if (!this.isPassiveSupported && this.touchingInfo.isHorizontalScroll === true) {
+    if (this.touchingInfo.isHorizontalScroll) {
       event.preventDefault();
     }
 
