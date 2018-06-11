@@ -72,7 +72,7 @@ export default class Carousel {
   private moveFrameTo(targetX: number, durationS: number = 0) {
     const style = this.itemsElement.style;
 
-    style[this.styleKey.transition] = `${this.styleKey.transform} ${durationS}s ${this.options.transitionTimingFunction}`;
+    style[this.styleKey.transition] = `${durationS}s ${this.options.transitionTimingFunction}`;
     style[this.styleKey.transform] = 'translate(' + targetX + 'px, 0)';
     this.itemsX = targetX;
   }
