@@ -12,7 +12,7 @@ export default class StyleKey {
 
   constructor() {
     const dummyElement = document.createElement('_');
-    this.transition = this.transitionKeys.find(key => typeof dummyElement.style[key] !== 'undefined');
-    this.transform = this.transformKeys.find(key => typeof dummyElement.style[key] !== 'undefined');
+    this.transition = this.transitionKeys.filter(key => typeof dummyElement.style[key] !== 'undefined')[0];
+    this.transform = this.transformKeys.filter(key => typeof dummyElement.style[key] !== 'undefined')[0];
   }
 }
