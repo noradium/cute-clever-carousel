@@ -8,7 +8,8 @@
     "watch": "tsc -w -p .",
     "test": "jest",
     "test:watch": "jest --watch",
-    "coverage": "jest --coverage"
+    "coverage": "jest --coverage",
+    "prepublish": "npm run build"
   },
   "author": "noradium",
   "repository": {
@@ -18,6 +19,7 @@
   "files": [
     "lib"
   ],
+  "typings": "lib/index.d.ts",
   "license": "MIT",
   "dependencies": {
     "tslib": "^1.9.2"
