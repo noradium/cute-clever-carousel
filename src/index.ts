@@ -43,10 +43,12 @@ export default class Carousel {
 
     this.reset();
     this.frameElement.addEventListener('touchstart', this.onTouchStart, this.touchEventListenerOption);
+    window.addEventListener('resize', this.onWindowResize);
   }
 
   destroy() {
     this.frameElement.removeEventListener('touchstart', this.onTouchStart);
+    window.removeEventListener('resize', this.onWindowResize);
   }
 
   reset() {
@@ -132,5 +134,9 @@ export default class Carousel {
       }
     }
     return grid[0];
+  }
+
+  private onWindowResize = () => {
+    this.reset();
   }
 }
