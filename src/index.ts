@@ -90,13 +90,9 @@ export default class Carousel {
   };
 
   private onTouchMove = (event: TouchEvent) => {
+    // 縦スクロールだとわかっているときは何もしない
     if (this.touchingInfo.isHorizontalScroll === false) {
       return;
-    }
-
-    // passive 非対応ブラウザでカルーセルをスクロールしようとする場合、デフォルトのスクロールはする必要がないので止めます
-    if (!this.isPassiveSupported) {
-      event.preventDefault();
     }
 
     const touch = event.touches[0];
@@ -104,6 +100,11 @@ export default class Carousel {
     if (typeof this.touchingInfo.isHorizontalScroll === 'undefined') {
       const dY = touch.pageY - this.touchingInfo.touchStartY;
       this.touchingInfo.isHorizontalScroll = Math.abs(dX) - Math.abs(dY) > 0;
+    }
+
+    // passive 非対応ブラウザでカルーセルをスクロールしようとする場合、デフォルトのスクロールを止めないとうまく動かない
+    if (!this.isPassiveSupported && this.touchingInfo.isHorizontalScroll === true) {
+      event.preventDefault();
     }
 
     this.moveFrameTo(this.touchingInfo.itemsStartX + dX);
