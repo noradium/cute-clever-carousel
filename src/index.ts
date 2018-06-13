@@ -103,9 +103,8 @@ export default class Carousel {
 
     if (this.touchingInfo.isHorizontalScroll) {
       event.preventDefault();
+      this.moveFrameTo(this.touchingInfo.itemsStartX + dX);
     }
-
-    this.moveFrameTo(this.touchingInfo.itemsStartX + dX);
   };
 
   private onTouchEnd = (event: TouchEvent) => {
