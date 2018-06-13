@@ -20,11 +20,11 @@ describe("index", () => {
   });
 
   describe('インスタンス化できる', () => {
-    test('passiveSupported が true のとき touchEventOptions が passive: true で適切に設定される', () => {
+    test('passiveSupported が true のとき touchEventOptions が passive: false で適切に設定される', () => {
       JestMockUtil.mockReturnValueOnce(isPassiveSupported, true);
       const carousel = new Carousel(document.getElementsByClassName('carousel')[0], {});
       expect(carousel['touchEventListenerOption']).toEqual({
-        passive: true
+        passive: false
       });
     });
     test('passiveSupported が false のとき touchEventOptions が適切に設定される', () => {
