@@ -41,11 +41,15 @@ export default class Carousel {
 
     this.reset();
     this.frameElement.addEventListener('touchstart', this.onTouchStart, this.touchEventListenerOption);
+    this.frameElement.addEventListener('touchmove', this.onTouchMove, this.touchEventListenerOption);
+    this.frameElement.addEventListener('touchend', this.onTouchEnd);
     window.addEventListener('resize', this.onWindowResize);
   }
 
   destroy() {
     this.frameElement.removeEventListener('touchstart', this.onTouchStart);
+    this.frameElement.removeEventListener('touchmove', this.onTouchMove);
+    this.frameElement.removeEventListener('touchend', this.onTouchEnd);
     window.removeEventListener('resize', this.onWindowResize);
   }
 
@@ -82,9 +86,6 @@ export default class Carousel {
       touchStartY: touch.pageY,
       itemsStartX: this.itemsX
     };
-
-    this.frameElement.addEventListener('touchmove', this.onTouchMove, this.touchEventListenerOption);
-    this.frameElement.addEventListener('touchend', this.onTouchEnd);
   };
 
   private onTouchMove = (event: TouchEvent) => {
@@ -112,8 +113,6 @@ export default class Carousel {
     this.moveFrameTo(nearestGridX, this.options.transitionDurationSec);
 
     this.touchingInfo = null;
-    this.frameElement.removeEventListener('touchmove', this.onTouchMove);
-    this.frameElement.removeEventListener('touchend', this.onTouchEnd);
   };
 
   private getNearestGridX(targetX: number) {
