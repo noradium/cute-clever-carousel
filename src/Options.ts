@@ -19,6 +19,19 @@ export interface Options {
    * coefficient of scroll amount
    */
   scrollDeltaCoefficient?: number;
+  /**
+   * enable inertia when touchend
+   */
+  inertia?: boolean;
+  /**
+   * acceleration of scroll when inertia is enabled [px/ms^2]
+   * this should be positive value
+   */
+  inertiaAcceleration?: number;
+  /**
+   * interval of inertia movement (2nd argument passed into setInterval)
+   */
+  inertiaIntervalMS?: number;
 }
 
 export const defaultOptions: Options = {
@@ -26,5 +39,8 @@ export const defaultOptions: Options = {
   transitionTimingFunction: 'ease',
   frameClassName: 'ccc-frame',
   itemsClassName: 'ccc-items',
-  scrollDeltaCoefficient: 1
+  scrollDeltaCoefficient: 1,
+  inertia: true,
+  inertiaAcceleration: 0.005,
+  inertiaIntervalMS: 16
 };
