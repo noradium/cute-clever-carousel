@@ -15,11 +15,16 @@ export interface Options {
    * class name of items element
    */
   itemsClassName?: string;
+  /**
+   * coefficient of scroll amount
+   */
+  scrollDeltaCoefficient?: number;
 }
 
 export const defaultOptions: Options = {
   transitionDurationSec: 0.5,
   transitionTimingFunction: 'ease',
   frameClassName: 'ccc-frame',
-  itemsClassName: 'ccc-items'
+  itemsClassName: 'ccc-items',
+  scrollDeltaCoefficient: 1
 };

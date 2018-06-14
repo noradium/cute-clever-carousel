@@ -38,7 +38,8 @@ describe("index", () => {
         transitionDurationSec: 0.5,
         transitionTimingFunction: 'ease',
         frameClassName: 'ccc-frame',
-        itemsClassName: 'ccc-items'
+        itemsClassName: 'ccc-items',
+        scrollDeltaCoefficient: 1
       });
     });
     test("Options 指定のあるときはそれぞれ指定された値が入る", () => {
@@ -57,13 +58,15 @@ describe("index", () => {
         transitionDurationSec: 0.1,
         transitionTimingFunction: 'linear',
         frameClassName: 'ccc-frame-custom',
-        itemsClassName: 'ccc-items-custom'
+        itemsClassName: 'ccc-items-custom',
+        scrollDeltaCoefficient: 1.5
       });
       expect(carousel['options']).toEqual({
         transitionDurationSec: 0.1,
         transitionTimingFunction: 'linear',
         frameClassName: 'ccc-frame-custom',
-        itemsClassName: 'ccc-items-custom'
+        itemsClassName: 'ccc-items-custom',
+        scrollDeltaCoefficient: 1.5
       });
     });
     test('その他プロパティが初期化される', () => {
