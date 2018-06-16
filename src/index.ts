@@ -126,7 +126,7 @@ export default class Carousel {
 
   private onTouchEnd = (event: TouchEvent) => {
     if (this.touchingInfo.deltaUpdatedAtMS) {
-      const initialVelocity = this.touchingInfo.deltaTouchX / this.touchingInfo.deltaUpdatedAtMS; // px/msec
+      const initialVelocity = this.touchingInfo.deltaTouchX * this.options.scrollDeltaCoefficient / this.touchingInfo.deltaUpdatedAtMS; // px/msec
 
       // 初速が0に近い場合は直接アニメーションで動かします。
       if (!this.options.inertia || !initialVelocity || this.abs(initialVelocity) < 0.1) {
