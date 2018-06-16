@@ -1,5 +1,6 @@
 import Carousel from 'cute-clever-carousel';
 import {Options} from '../../lib/Options';
+import queryString = require('query-string');
 
 const optionsElement = document.getElementById('options');
 
@@ -12,6 +13,7 @@ const options: Options = {
   inertiaIntervalMS: 16
 };
 
+const query = queryString.parse(location.search);
 // init options input
 Object.keys(options).forEach(optionKey => {
   const tr = document.createElement('tr');
@@ -24,7 +26,7 @@ Object.keys(options).forEach(optionKey => {
   const inputTd = document.createElement('td');
   const input = document.createElement('input');
   input.name = optionKey;
-  input.value = options[optionKey];
+  input.value = typeof query[optionKey] !== 'undefined' ? query[optionKey] : options[optionKey];
   input.addEventListener('change', update);
   inputTd.appendChild(input);
   tr.appendChild(inputTd);
