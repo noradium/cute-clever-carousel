@@ -14,6 +14,16 @@ module.exports = {
     modules: ['node_modules']
   },
 
+  module: {
+    rules: [
+      {
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        loader: 'awesome-typescript-loader'
+      }
+    ]
+  },
+
   // Configuration for dev server
   devServer: {
     contentBase: 'dist',
