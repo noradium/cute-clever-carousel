@@ -2,6 +2,9 @@
 This library doesn't have much function as yet.
 Rather than a carousel, it is a scroll box with a grid.
 
+## Sample
+https://noradium.github.io/cute-clever-carousel/sample/dist
+
 ## Usage
 ### Install
 ```bash
