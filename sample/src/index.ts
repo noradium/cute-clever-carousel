@@ -1,4 +1,4 @@
-import Carousel from 'cute-clever-carousel';
+import Carousel, {SlideEvent} from 'cute-clever-carousel';
 import queryString = require('query-string');
 import {defaultOptions} from '../../lib/Options';
 
@@ -54,6 +54,10 @@ function update() {
     carouselInstance.destroy();
   }
   carouselInstance = new Carousel(document.getElementsByClassName('carousel')[0], options);
+
+  carouselInstance.on('slideEnd', (event: SlideEvent) => {
+    console.log('event:slideEnd', event);
+  });
 }
 
 document.getElementsByClassName('prev-button')[0].addEventListener('click', () => {
