@@ -48,6 +48,16 @@ new Carousel(document.getElementsByClassName('carousel')[0], {/* options */});
 ### Options
 see `src/Options.ts`
 
+### APIs
+|interface|return value||
+|----|----|:---|
+|hasNext|boolean|whether it has the next item|
+|hasPrev|boolean|whether it has the prev item|
+|reset()|void|initialize grid|
+|prev()|void|slide to prev item if exists|
+|next()|void|slide to next item if exists|
+|destroy()|void|remove all event listeners|
+
 ## Development
 ```bash
 $ npm run watch

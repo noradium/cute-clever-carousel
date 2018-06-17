@@ -52,6 +52,14 @@ export default class Carousel {
     window.addEventListener('resize', this.onWindowResize);
   }
 
+  get hasNext() {
+    return 0 <= this.nextGridIndex();
+  }
+
+  get hasPrev() {
+    return this.prevGridIndex() <= this.grid.length - 1;
+  }
+
   destroy() {
     this.frameElement.removeEventListener('touchstart', this.onTouchStart);
     this.frameElement.removeEventListener('touchmove', this.onTouchMove);
@@ -64,23 +72,29 @@ export default class Carousel {
   }
 
   next() {
-    const currentX = this.getNearestGridX(this.itemsX);
-    const currentIndex = this.grid.indexOf(currentX);
-    const nextIndex = currentIndex - 1;
-    if (0 <= nextIndex) {
+    if (this.hasNext) {
       this.stopInertiaMove();
-      this.moveFrameTo(this.grid[nextIndex], this.options.transitionDurationSec);
+      this.moveFrameTo(this.grid[this.nextGridIndex()], this.options.transitionDurationSec);
     }
   }
 
   prev() {
+    if (this.hasPrev) {
+      this.stopInertiaMove();
+      this.moveFrameTo(this.grid[this.prevGridIndex()], this.options.transitionDurationSec);
+    }
+  }
+
+  private nextGridIndex() {
     const currentX = this.getNearestGridX(this.itemsX);
     const currentIndex = this.grid.indexOf(currentX);
-    const nextIndex = currentIndex + 1;
-    if (nextIndex <= this.grid.length - 1) {
-      this.stopInertiaMove();
-      this.moveFrameTo(this.grid[nextIndex], this.options.transitionDurationSec);
-    }
+    return currentIndex - 1;
+  }
+
+  private prevGridIndex() {
+    const currentX = this.getNearestGridX(this.itemsX);
+    const currentIndex = this.grid.indexOf(currentX);
+    return currentIndex + 1;
   }
 
   private initializeGrid() {
