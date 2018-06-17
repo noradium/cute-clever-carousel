@@ -63,6 +63,26 @@ export default class Carousel {
     this.initializeGrid();
   }
 
+  next() {
+    const currentX = this.getNearestGridX(this.itemsX);
+    const currentIndex = this.grid.indexOf(currentX);
+    const nextIndex = currentIndex - 1;
+    if (0 <= nextIndex) {
+      this.stopInertiaMove();
+      this.moveFrameTo(this.grid[nextIndex], this.options.transitionDurationSec);
+    }
+  }
+
+  prev() {
+    const currentX = this.getNearestGridX(this.itemsX);
+    const currentIndex = this.grid.indexOf(currentX);
+    const nextIndex = currentIndex + 1;
+    if (nextIndex <= this.grid.length - 1) {
+      this.stopInertiaMove();
+      this.moveFrameTo(this.grid[nextIndex], this.options.transitionDurationSec);
+    }
+  }
+
   private initializeGrid() {
     const maxGridX = this.itemsElement.scrollWidth - this.frameElement.clientWidth;
     const grid = [];
