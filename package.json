@@ -16,11 +16,22 @@
     "type": "git",
     "url": "https://github.com/noradium/cute-clever-carousel"
   },
+  "keywords": [
+    "carousel",
+    "slider",
+    "grid",
+    "scroll",
+    "touch",
+    "mobile"
+  ],
   "files": [
     "lib"
   ],
   "typings": "lib/index.d.ts",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/noradium/cute-clever-carousel/issues"
+  },
   "dependencies": {
     "tslib": "^1.9.2"
   },
