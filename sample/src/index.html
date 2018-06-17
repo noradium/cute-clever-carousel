@@ -31,6 +31,21 @@
 			color: #ccccff;
 			margin-top: 32px;
 		}
+		.controller {
+			text-align: center;
+		}
+		.controller button {
+			background-color: #ccccff;
+			padding: 2px 16px;
+			border-radius: 4px;
+		}
+		.controller button:not(:first-child) {
+			margin-left: 8px;
+		}
+		#options input {
+			border: none;
+			border-bottom: solid 1px #000;
+		}
 	</style>
 </head>
 <body>
@@ -55,6 +70,10 @@
 			<img src="https://placehold.jp/150x200.png?text=15">
 			<img src="https://placehold.jp/150x200.png?text=16">
 		</div>
+	</div>
+	<div class="controller">
+		<button type="button" class="prev-button">prev</button>
+		<button type="button" class="next-button">next</button>
 	</div>
 </div>
 <table id="options">

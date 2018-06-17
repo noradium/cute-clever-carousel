@@ -1,21 +1,15 @@
 import Carousel from 'cute-clever-carousel';
-import {Options} from '../../lib/Options';
 import queryString = require('query-string');
+import {defaultOptions} from '../../lib/Options';
 
 const optionsElement = document.getElementById('options');
 
-const options: Options = {
-  transitionDurationSec: 0.5,
-  transitionTimingFunction: 'ease',
-  scrollDeltaCoefficient: 1,
-  inertia: true,
-  inertiaAcceleration: 0.005,
-  inertiaIntervalMS: 16
-};
-
 const query = queryString.parse(location.search);
 // init options input
-Object.keys(options).forEach(optionKey => {
+Object.keys(defaultOptions).forEach(optionKey => {
+  if (optionKey === 'frameClassName' || optionKey === 'itemsClassName') {
+    return;
+  }
   const tr = document.createElement('tr');
   const labelTd = document.createElement('td');
   const label = document.createElement('span');
@@ -26,7 +20,7 @@ Object.keys(options).forEach(optionKey => {
   const inputTd = document.createElement('td');
   const input = document.createElement('input');
   input.name = optionKey;
-  input.value = typeof query[optionKey] !== 'undefined' ? query[optionKey] : options[optionKey];
+  input.value = typeof query[optionKey] !== 'undefined' ? query[optionKey] : defaultOptions[optionKey];
   input.addEventListener('change', update);
   inputTd.appendChild(input);
   tr.appendChild(inputTd);
@@ -61,5 +55,12 @@ function update() {
   }
   carouselInstance = new Carousel(document.getElementsByClassName('carousel')[0], options);
 }
+
+document.getElementsByClassName('prev-button')[0].addEventListener('click', () => {
+  carouselInstance.prev();
+});
+document.getElementsByClassName('next-button')[0].addEventListener('click', () => {
+  carouselInstance.next();
+});
 
 update();
