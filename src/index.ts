@@ -1,6 +1,8 @@
+import {EventEmitter} from 'events';
 import StyleKey from './util/StyleKey';
 import isPassiveSupported from './util/isPassiveSupported';
 import {defaultOptions, Options} from './Options';
+import {EventKeyMap, SlideEvent} from './Event';
 
 interface TouchingInfo {
   touchStartX: number;
@@ -13,7 +15,7 @@ interface TouchingInfo {
   deltaUpdatedAtMS: number;
 }
 
-export default class Carousel {
+class Carousel {
   private styleKey: StyleKey;
   private rootElement: HTMLElement;
   private frameElement: HTMLElement;
@@ -29,6 +31,7 @@ export default class Carousel {
   private inertiaTimerId: number | null = null;
 
   private touchEventListenerOption: {passive: boolean} | false;
+  private eventEmitter: EventEmitter = new EventEmitter();
 
   constructor(
     element: Element,
@@ -49,6 +52,8 @@ export default class Carousel {
     this.frameElement.addEventListener('touchstart', this.onTouchStart, this.touchEventListenerOption);
     this.frameElement.addEventListener('touchmove', this.onTouchMove, this.touchEventListenerOption);
     this.frameElement.addEventListener('touchend', this.onTouchEnd);
+    this.itemsElement.addEventListener('transitionEnd', this.onTransitionEnd);
+    this.itemsElement.addEventListener('webkitTransitionEnd', this.onTransitionEnd);
     window.addEventListener('resize', this.onWindowResize);
   }
 
@@ -64,6 +69,8 @@ export default class Carousel {
     this.frameElement.removeEventListener('touchstart', this.onTouchStart);
     this.frameElement.removeEventListener('touchmove', this.onTouchMove);
     this.frameElement.removeEventListener('touchend', this.onTouchEnd);
+    this.itemsElement.removeEventListener('transitionEnd', this.onTransitionEnd);
+    this.itemsElement.removeEventListener('webkitTransitionEnd', this.onTransitionEnd);
     window.removeEventListener('resize', this.onWindowResize);
   }
 
@@ -83,6 +90,15 @@ export default class Carousel {
       this.stopInertiaMove();
       this.moveFrameTo(this.grid[this.prevGridIndex()], this.options.transitionDurationSec);
     }
+  }
+
+  on<K extends keyof EventKeyMap>(type: K, listener: (e: EventKeyMap[K]) => void): Carousel {
+    this.eventEmitter.on(type, listener);
+    return this;
+  }
+
+  private emit<K extends keyof EventKeyMap>(type: K, event: EventKeyMap[K]) {
+    this.eventEmitter.emit(type, event);
   }
 
   private nextGridIndex() {
@@ -118,6 +134,13 @@ export default class Carousel {
     style[this.styleKey.transform] = 'translate(' + targetX + 'px, 0)';
     this.itemsX = targetX;
   }
+
+  private onTransitionEnd = (e: TransitionEvent) => {
+    this.emit('slideEnd', {
+      currentIndex: this.grid.length - 1 - this.grid.indexOf(this.getNearestGridX(this.itemsX)),
+      total: this.grid.length
+    });
+  };
 
   private onTouchStart = (event: TouchEvent) => {
     this.stopInertiaMove();
@@ -249,3 +272,6 @@ export default class Carousel {
     this.reset();
   }
 }
+
+export default Carousel;
+export {Options, SlideEvent};

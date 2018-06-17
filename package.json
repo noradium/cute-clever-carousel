@@ -33,9 +33,11 @@
     "url": "https://github.com/noradium/cute-clever-carousel/issues"
   },
   "dependencies": {
+    "events": "^3.0.0",
     "tslib": "^1.9.2"
   },
   "devDependencies": {
+    "@types/events": "^1.2.0",
     "@types/jest": "^23.0.0",
     "jest": "^23.1.0",
     "ts-jest": "^22.4.6",
