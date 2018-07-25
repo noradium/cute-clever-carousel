@@ -115,6 +115,10 @@ class Carousel {
 
   private initializeGrid() {
     const maxGridX = this.itemsElement.scrollWidth - this.frameElement.clientWidth;
+    if (maxGridX < 0) {
+        this.grid = [0];
+        return;
+    }
     const grid = [];
     for (let i = 0; i < this.itemsElement.children.length; ++i) {
       const x = (this.itemsElement.children[i] as HTMLElement).offsetLeft;
