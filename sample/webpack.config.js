@@ -19,7 +19,7 @@ module.exports = {
       {
         test: /\.ts$/,
         exclude: /node_modules/,
-        loader: 'awesome-typescript-loader'
+        loader: 'ts-loader'
       }
     ]
   },
@@ -34,10 +34,10 @@ module.exports = {
   devtool: 'source-map',
 
   plugins: [
-    new CopyWebpackPlugin([
-      {
-        from: 'src/index.html'
-      },
-    ])
+    new CopyWebpackPlugin({
+      patterns: [
+        {from: 'src/index.html'}
+      ]
+    })
   ]
 };
