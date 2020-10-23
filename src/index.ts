@@ -24,7 +24,7 @@ class Carousel {
   /**
    * [-items[n].x, -items[n-1].x,..., -items[0].x]
    */
-  private grid: number[];
+  private grid: number[] = [];
   private touchingInfo: TouchingInfo | null = null;
   private itemsX: number = 0;
   private inertiaCurrentVelocity = 0;
@@ -52,8 +52,8 @@ class Carousel {
     this.frameElement.addEventListener('touchstart', this.onTouchStart, this.touchEventListenerOption);
     this.frameElement.addEventListener('touchmove', this.onTouchMove, this.touchEventListenerOption);
     this.frameElement.addEventListener('touchend', this.onTouchEnd);
-    this.itemsElement.addEventListener('transitionEnd', this.onTransitionEnd);
-    this.itemsElement.addEventListener('webkitTransitionEnd', this.onTransitionEnd);
+    this.itemsElement.addEventListener('transitionend', this.onTransitionEnd);
+    this.itemsElement.addEventListener('webkitTransitionEnd' as 'transitionend', this.onTransitionEnd);
     window.addEventListener('resize', this.onWindowResize);
   }
 
@@ -69,8 +69,8 @@ class Carousel {
     this.frameElement.removeEventListener('touchstart', this.onTouchStart);
     this.frameElement.removeEventListener('touchmove', this.onTouchMove);
     this.frameElement.removeEventListener('touchend', this.onTouchEnd);
-    this.itemsElement.removeEventListener('transitionEnd', this.onTransitionEnd);
-    this.itemsElement.removeEventListener('webkitTransitionEnd', this.onTransitionEnd);
+    this.itemsElement.removeEventListener('transitionend', this.onTransitionEnd);
+    this.itemsElement.removeEventListener('webkitTransitionEnd' as 'transitionend', this.onTransitionEnd);
     window.removeEventListener('resize', this.onWindowResize);
   }
 
@@ -225,7 +225,7 @@ class Carousel {
     const inertiaIntervalMS = this.options.inertiaIntervalMS;
 
     this.inertiaCurrentVelocity = initialVelocity;
-    this.inertiaTimerId = setInterval(() => {
+    this.inertiaTimerId = window.setInterval(() => {
       const currentVelocity = this.inertiaCurrentVelocity;
       const nextX = this.itemsX + currentVelocity * inertiaIntervalMS;
       const nextXtargetXDiff = targetX - nextX;
