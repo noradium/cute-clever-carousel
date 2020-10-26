@@ -114,7 +114,10 @@ class Carousel {
   }
 
   private initializeGrid() {
-    const maxGridX = this.itemsElement.scrollWidth - this.frameElement.clientWidth;
+    const frameComputedStyle = window.getComputedStyle(this.frameElement);
+    const paddingLeft = Number(frameComputedStyle.paddingLeft.replace('px', ''));
+    const paddingRight = Number(frameComputedStyle.paddingRight.replace('px', ''));
+    const maxGridX = this.itemsElement.scrollWidth - this.frameElement.clientWidth + paddingLeft + paddingRight;
     if (maxGridX < 0) {
         this.grid = [0];
         return;
