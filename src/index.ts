@@ -165,6 +165,9 @@ class Carousel {
   };
 
   private onTouchMove = (event: TouchEvent) => {
+    if (!this.touchingInfo) {
+      return;
+    }
     // 縦スクロールだとわかっているときは何もしない
     if (this.touchingInfo.isHorizontalScroll === false) {
       return;
