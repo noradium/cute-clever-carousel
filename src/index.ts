@@ -192,6 +192,9 @@ class Carousel {
   };
 
   private onTouchEnd = (event: TouchEvent) => {
+    if (!this.touchingInfo) {
+      return;
+    }
     if (this.touchingInfo.deltaUpdatedAtMS) {
       const initialVelocity = this.touchingInfo.deltaTouchX * this.options.scrollDeltaCoefficient / this.touchingInfo.deltaUpdatedAtMS; // px/msec
 
