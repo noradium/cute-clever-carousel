@@ -1,6 +1,6 @@
 {
   "name": "cute-clever-carousel",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "js carousel",
   "main": "lib/index.js",
   "scripts": {
